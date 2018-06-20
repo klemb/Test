@@ -43,8 +43,8 @@ myContent = """{
         "order": 1
     }]
 }"""
-toencode = "ocs.autotest@mclaren.com" + ':'
-url = "https://mclaren.qtestnet.com/oauth/token"
+toencode = "{USERIS}" + ':'
+url = "https://URL/oauth/token"
 auth = "Basic " + (base64.b64encode(toencode.encode('utf-8')).decode('utf-8'))
 authHeaders = {
     "Content-Type": "application/x-www-form-urlencoded",
@@ -52,8 +52,8 @@ authHeaders = {
 }
 body = {
     "grant_type": "password",
-    "username": "ocs.autotest@mclaren.com",
-    "password": "McL@ren1"
+    "username": "USERID",
+    "password": "PWD"
 }
 myResponse = requests.post(url=url, headers=authHeaders, data=body)
 if (myResponse.ok):
@@ -64,7 +64,7 @@ if (myResponse.ok):
     headers['Authorization'] = token
 else:
     myResponse.raise_for_status()
-myInstance = "https://mclaren.qtestnet.com"
+myInstance = "https://URL"
 testStart = datetime.now().isoformat()[:-3] + "Z"
 url = myInstance + "/api/v3/projects/" + myProjectID + "/test-runs/" + myTestRunID + "/auto-test-logs"
 dbody = json.dumps(myContent)
